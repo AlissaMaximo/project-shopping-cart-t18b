@@ -40,4 +40,8 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => { };
+function init(){
+  
+}
+
+window.onload = () => { init() };
