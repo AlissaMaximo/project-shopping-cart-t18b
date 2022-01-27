@@ -84,7 +84,7 @@ window.onload = async () => {
   document.getElementsByClassName('cart__items')[0].innerHTML = getSavedCartItems();
   document.getElementsByClassName('cart__items')[0].childNodes.forEach((product) => {
     product.addEventListener('click', cartItemClickListener);
-  })
+  });
 };
 
 /*
