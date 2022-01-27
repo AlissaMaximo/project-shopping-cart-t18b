@@ -1,12 +1,11 @@
-const saveCartItems = ({ sku, name, salePrice }) => {
-  let myNewCart = getSavedCartItems();
-
-  if (myNewCart === null) {
-    myNewCart = {content: []};
+const saveCartItems = ({ sku, name, salePrice }, oldCart) => {
+  let currentCart = oldCart;
+  if (currentCart === null) {
+    currentCart = { content: [] };
   }
-  myNewCart.content.push({ sku, name, salePrice });
+  currentCart.content.push({ sku, name, salePrice });
 
-  localStorage.setItem('cartItems', JSON.stringify(myNewCart));
+  localStorage.setItem('cartItems', JSON.stringify(currentCart));
 };
 
 if (typeof module !== 'undefined') {

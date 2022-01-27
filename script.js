@@ -54,20 +54,14 @@ async function createProductsList() {
   });
 }
 
-//recuperar o q está no localStorage
-  //transformar um array (com vários objetos/produtos) ou arrya vazio se não tiver produtos
-  // ^ uma linha só
-  
-  //no array dar o push
-  //salvar no local storage como objeto e então em json <- em uma linha só 
-
 async function getItemSku(itemSku) {
   const selectedItem = await fetchItem(itemSku);
   const { id: sku, title: name, price: salePrice } = selectedItem;
   const cartItem = createCartItemElement({ sku, name, salePrice });
   const cartList = document.querySelector('.cart__items');
 
-  saveCartItems({ sku, name, salePrice });
+  const oldCart = getSavedCartItems();
+  saveCartItems({ sku, name, salePrice }, oldCart);
 
   cartList.appendChild(cartItem);
 }
@@ -84,16 +78,18 @@ function addToCart() {
   });
 }
 
-function loadCart () {
-  let myLoadedCart = getSavedCartItems();
+function loadCart() {
+  const myLoadedCart = getSavedCartItems();
 
-  myLoadedCart.content.forEach((product) => {
-    const { sku, name, salePrice } = product;
-    const cartItem = createCartItemElement({ sku, name, salePrice });
-    const cartList = document.querySelector('.cart__items');
-  
-    cartList.appendChild(cartItem);
-  })
+  if (myLoadedCart !== null) {
+    myLoadedCart.content.forEach((product) => {
+      const { sku, name, salePrice } = product;
+      const cartItem = createCartItemElement({ sku, name, salePrice });
+      const cartList = document.querySelector('.cart__items');
+
+      cartList.appendChild(cartItem);
+    });
+  }
 }
 
 window.onload = async () => {
@@ -109,5 +105,5 @@ Requisito 2 e 8: Lilian Azevedo me auxiliou a entender o que algumas funções r
 Requisito 8: https://jestjs.io/docs/expect#tohavebeencalled
 https://jestjs.io/docs/expect
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
-
+Requisito 4: Bruno Alvez me ajudou a entender como fazer o localStorage.
 */
