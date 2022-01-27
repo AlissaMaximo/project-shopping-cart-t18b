@@ -1,3 +1,5 @@
+const cartList = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -29,8 +31,6 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
-  const cartList = document.querySelector('.cart__items');
   event.target.remove();
 }
 
@@ -60,7 +60,6 @@ async function getItemSku(itemSku) {
   const selectedItem = await fetchItem(itemSku);
   const { id: sku, title: name, price: salePrice } = selectedItem;
   const cartItem = createCartItemElement({ sku, name, salePrice });
-  const cartList = document.querySelector('.cart__items');
   cartList.appendChild(cartItem);
 }
 
@@ -72,8 +71,8 @@ function addToCart() {
       const elementParent = e.target.parentNode;
       const itemSku = getSkuFromProductItem(elementParent);
       getItemSku(itemSku);
-    })
-  })
+    });
+  });
 }
 
 window.onload = async () => {
