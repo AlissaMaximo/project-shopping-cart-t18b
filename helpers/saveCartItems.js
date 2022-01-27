@@ -1,12 +1,4 @@
-const saveCartItems = ({ sku, name, salePrice }, oldCart) => {
-  let currentCart = oldCart;
-  if (currentCart === null) {
-    currentCart = { content: [] };
-  }
-  currentCart.content.push({ sku, name, salePrice });
-
-  localStorage.setItem('cartItems', JSON.stringify(currentCart));
-};
+const saveCartItems = (param) => localStorage.setItem('cartItems', param);
 
 if (typeof module !== 'undefined') {
   module.exports = saveCartItems;

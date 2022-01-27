@@ -30,6 +30,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  saveCartItems(document.getElementsByClassName('cart__items')[0].innerHTML);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -60,10 +61,9 @@ async function getItemSku(itemSku) {
   const cartItem = createCartItemElement({ sku, name, salePrice });
   const cartList = document.querySelector('.cart__items');
 
-  const oldCart = getSavedCartItems();
-  saveCartItems({ sku, name, salePrice }, oldCart);
-
   cartList.appendChild(cartItem);
+
+  saveCartItems(document.getElementsByClassName('cart__items')[0].innerHTML);
 }
 
 function addToCart() {
@@ -78,24 +78,13 @@ function addToCart() {
   });
 }
 
-function loadCart() {
-  const myLoadedCart = getSavedCartItems();
-
-  if (myLoadedCart !== null) {
-    myLoadedCart.content.forEach((product) => {
-      const { sku, name, salePrice } = product;
-      const cartItem = createCartItemElement({ sku, name, salePrice });
-      const cartList = document.querySelector('.cart__items');
-
-      cartList.appendChild(cartItem);
-    });
-  }
-}
-
 window.onload = async () => {
   await createProductsList();
   addToCart();
-  loadCart();
+  document.getElementsByClassName('cart__items')[0].innerHTML = getSavedCartItems();
+  document.getElementsByClassName('cart__items')[0].childNodes.forEach((product) => {
+    product.addEventListener('click', cartItemClickListener);
+  })
 };
 
 /*
@@ -106,4 +95,5 @@ Requisito 8: https://jestjs.io/docs/expect#tohavebeencalled
 https://jestjs.io/docs/expect
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
 Requisito 4: Bruno Alvez me ajudou a entender como fazer o localStorage.
+Requisito 4 refeito com Esdras Tenório para passar no requisito 10 que também foi auxiliado.
 */
