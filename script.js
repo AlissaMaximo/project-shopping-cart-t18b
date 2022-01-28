@@ -53,6 +53,8 @@ async function createProductsList() {
     const elementProduct = createProductItemElement({ sku, name, image });
     items.appendChild(elementProduct);
   });
+
+  document.querySelector('.loading').remove();
 }
 
 async function getItemSku(itemSku) {
@@ -73,10 +75,40 @@ function addToCart() {
     addButton.addEventListener('click', (e) => {
       const elementParent = e.target.parentNode;
       const itemSku = getSkuFromProductItem(elementParent);
+
       getItemSku(itemSku);
+    
+      // calculateTotal();
     });
   });
 }
+
+/* function calculateTotal(price) {
+    let totalPriceElement = document.querySelector('.total-price');
+    if (totalPriceElement === null) {
+      totalPriceElement = document.createElement('h2');
+      const cartSection = document.querySelector('.cart');
+      let totalValue = 0;
+      totalPriceElement.innerText = totalValue;
+      cartSection.appendChild(totalPriceElement);
+    }
+    let totalValue = totalPriceElement.innerText;
+    console.log(totalValue);
+
+    totalPriceElement.innerText = totalValue;
+  }
+  calculateTotal(salePrice); */
+
+function clearCart() {
+  const cartList = document.querySelector('.cart__items');
+  const totalPriceValue = document.querySelector('.total-price');
+
+  cartList.innerHTML = '';
+  totalPriceValue.innerText = 0;
+}
+
+const clearButton = document.querySelector('.empty-cart');
+clearButton.addEventListener('click', clearCart);
 
 window.onload = async () => {
   await createProductsList();
@@ -96,4 +128,5 @@ https://jestjs.io/docs/expect
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
 Requisito 4: Bruno Alvez me ajudou a entender como fazer o localStorage.
 Requisito 4 refeito com Esdras Tenório para passar no requisito 10 que também foi auxiliado.
+Requisito 6 e 7: Gabriel Julio me auxiliou a entender e implementar os requisitos, quanto ao fetch/await, o CSS e outros.
 */
