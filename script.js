@@ -129,4 +129,5 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 Requisito 4: Bruno Alvez me ajudou a entender como fazer o localStorage.
 Requisito 4 refeito com Esdras Tenório para passar no requisito 10 que também foi auxiliado.
 Requisito 6 e 7: Gabriel Julio me auxiliou a entender e implementar os requisitos, quanto ao fetch/await, o CSS e outros.
+Requisito 11: Joicy corrigiu o teste.
 */
